@@ -1,0 +1,49 @@
+# Global ignores for all projects
+node_modules/
+*/node_modules/
+**/node_modules/
+
+# Yarn files
+.yarn/
+*/.yarn/
+**/.yarn/
+.yarnrc.yml
+*/.yarnrc.yml
+yarn.lock
+*/yarn.lock
+*.tgz
+*.gz
+
+# Build outputs
+dist/
+build/
+.next/
+*/dist/
+*/build/
+*/.next/
+
+# Environment files
+.env*
+*/.env*
+
+# Logs
+*.log
+.log
+install.log
+*/install.log
+
+# Docker binaries and volumes
+Dockerfile
+*/Dockerfile
+docker-compose.override.yml
+*/docker-compose.override.yml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo

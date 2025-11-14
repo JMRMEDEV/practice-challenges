@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  couchdb:
+    image: couchdb:3.3
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+    ports:
+      - "5984:5984"
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "3001:3001"
+    depends_on:
+      - couchdb
+
+  content-service:
+    build: ./content-service
+    ports:
+      - "3002:3002"
+    depends_on:
+      - couchdb
+
+  bff:
+    build: ./bff
+    ports:
+      - "3003:3003"
+    depends_on:
+      - auth-service
+      - content-service
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - bff
+
+volumes:
+  couchdb_data:
