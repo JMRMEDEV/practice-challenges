@@ -1,16 +1,23 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './components/Home'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Suspense } from 'react';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { Loader } from './components/Loader';
+import { Home } from './components/Home';
+import { MovieDetails } from './components/MovieDetails';
+import { Favorites } from './components/Favorites';
 
-function App() {
+export const App = () => {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </div>
-    </Router>
-  )
-}
-
-export default App
+    <ErrorBoundary>
+      <Router>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movie/:id" element={<MovieDetails />} />
+            <Route path="/favorites" element={<Favorites />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </ErrorBoundary>
+  );
+};
