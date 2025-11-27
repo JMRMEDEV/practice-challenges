@@ -6,7 +6,7 @@ const sampleCourses = [
     description: 'Learn TypeScript from scratch and build type-safe applications',
     instructorId: 'instructor_1',
     instructorName: 'John Doe',
-    thumbnail: 'https://via.placeholder.com/400x200/0070f3/ffffff?text=TypeScript',
+    thumbnail: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=400&fit=crop',
     duration: 7200,
     level: 'beginner',
     category: 'programming',
@@ -34,7 +34,7 @@ const sampleCourses = [
     description: 'Master React fundamentals and build modern web applications',
     instructorId: 'instructor_1',
     instructorName: 'John Doe',
-    thumbnail: 'https://via.placeholder.com/400x200/61dafb/000000?text=React',
+    thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=400&fit=crop',
     duration: 10800,
     level: 'beginner',
     category: 'programming',
@@ -54,7 +54,7 @@ const sampleCourses = [
     description: 'Build scalable backend applications with Node.js',
     instructorId: 'instructor_2',
     instructorName: 'Jane Smith',
-    thumbnail: 'https://via.placeholder.com/400x200/339933/ffffff?text=Node.js',
+    thumbnail: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=800&h=400&fit=crop',
     duration: 14400,
     level: 'advanced',
     category: 'programming',
@@ -65,7 +65,7 @@ const sampleCourses = [
     description: 'Learn the principles of great user interface design',
     instructorId: 'instructor_2',
     instructorName: 'Jane Smith',
-    thumbnail: 'https://via.placeholder.com/400x200/ff6b6b/ffffff?text=UI+Design',
+    thumbnail: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=400&fit=crop',
     duration: 9000,
     level: 'intermediate',
     category: 'design',
@@ -91,8 +91,12 @@ async function seedData() {
     });
 
     if (!registerRes.ok) {
-      const error = await registerRes.json();
-      throw new Error(error.message || 'Registration failed');
+      const error = await registerRes.json().catch(() => ({ message: 'Unknown error' }));
+      if (registerRes.status === 409 || error.message?.includes('already exists')) {
+        console.log('Instructor account already exists, continuing...');
+      } else {
+        throw new Error(error.message || `Registration failed with status ${registerRes.status}`);
+      }
     }
 
     // Login to get token
@@ -138,6 +142,9 @@ async function seedData() {
     console.log('Password: password123');
   } catch (error) {
     console.error('Error seeding data:', error.message);
+    console.error('Make sure all services are running: docker-compose ps');
+    console.error('Check BFF is accessible: curl http://localhost:3003/health');
+    process.exit(1);
   }
 }
 
