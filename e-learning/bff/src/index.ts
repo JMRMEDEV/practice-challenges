@@ -117,6 +117,15 @@ app.post('/api/courses', authMiddleware, async (req, res) => {
   }
 });
 
+app.delete('/api/courses/:id', authMiddleware, async (req, res) => {
+  try {
+    const response = await axios.delete(`${CONTENT_SERVICE_URL}/courses/${req.params.id}`);
+    res.status(response.status).json(response.data);
+  } catch (error: any) {
+    res.status(error.response?.status || 500).json(error.response?.data || { error: 'Failed to delete course' });
+  }
+});
+
 app.post('/api/enrollments', authMiddleware, async (req, res) => {
   try {
     const response = await axios.post(`${CONTENT_SERVICE_URL}/enrollments`, req.body);

@@ -32,7 +32,7 @@ async function clearData() {
     }
 
     const data = await coursesRes.json();
-    const courses = Array.isArray(data) ? data : [];
+    const courses = data.courses || [];
 
     // Delete each course
     console.log(`Deleting ${courses.length} courses...`);
