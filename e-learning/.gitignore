@@ -33,8 +33,6 @@ yarn-error.log*
 */logs/
 
 # Docker
-Dockerfile
-*/Dockerfile
 docker-compose.override.yml
 
 # OS

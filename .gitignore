@@ -33,8 +33,6 @@ install.log
 */install.log
 
 # Docker binaries and volumes
-Dockerfile
-*/Dockerfile
 docker-compose.override.yml
 */docker-compose.override.yml
 
