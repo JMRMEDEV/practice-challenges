@@ -1,0 +1,107 @@
+.hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 60px 0;
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.instructor {
+  font-size: 18px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.meta span {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.main h2 {
+  margin-bottom: 20px;
+  color: #0070f3;
+}
+
+.main p {
+  line-height: 1.8;
+  color: #666;
+}
+
+.lessons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lesson {
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+.lesson:hover {
+  border-color: #0070f3;
+}
+
+.lesson h4 {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.lesson p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.lesson span {
+  color: #999;
+  font-size: 12px;
+}
+
+.sidebar {
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+}
+
+.thumbnail {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}
